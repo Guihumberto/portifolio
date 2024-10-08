@@ -1,11 +1,10 @@
 <template>
-    <div class="headerWrapper">
+    <div class="headerWrapper" :class="theme == 'dark' ? '': 'bg-white border'">
         <div class="subHeader">
-            <v-avatar><span class="text-white">JHJ</span></v-avatar>
+            <v-avatar><span class="text-red font-weight-bold">JHJ</span></v-avatar>
             <v-btn 
                 variant="text" :icon="iconDark"
                 @click="darkModeChange()"
-                color="white"
             >
             </v-btn>
         </div>
@@ -13,7 +12,9 @@
 </template>
 
 <script setup>
-    import { computed, ref } from 'vue'
+    import { computed, ref, inject } from 'vue'
+
+    const theme = inject('theme')
     
     const darkMode = ref(true)
 

@@ -10,8 +10,10 @@
 
 <script setup>
   import headerApp from '@/layouts/headerApp.vue'
+  import { provide } from 'vue';
 
   const theme = ref('dark')
+  provide('theme', theme)
 
   const changeTheme = (evento) => {
     if(evento.value) theme.value = 'dark'

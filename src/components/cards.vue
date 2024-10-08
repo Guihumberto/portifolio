@@ -1,15 +1,14 @@
 <template>
      <div id="cards">
-      <div class="card" v-for="item, i in list" :key="i">
+      <div class="card" v-for="item, i in list" :key="i" @click="goTo(item.url)">
         <div class="card-border"></div>
-        <div class="card-content">
+        <div class="card-content" :class="theme == 'dark' ? '': 'bg-white border'">
           <div class="img">
             <v-icon color="grey" size="80">{{item.icon}}</v-icon>
           </div>
           <div class="wrappercontent">
-            <div>
-              <h3 class="text-white d-flex justify-start align-center">
-                <v-icon class="mr-2" :color="item.color">{{item.icon}}</v-icon>
+            <div class="mt-3 text-center w-100">
+              <h3 class="d-flex justify-center align-center">
                   {{item.name}}
               </h3>
               <p class="font-weight-thin text-grey">{{ item.text }}</p>
@@ -21,15 +20,17 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
+    import { onMounted, ref, inject } from 'vue';
+
+    const theme = inject('theme')
 
     const list = ref([
-      {name: 'Estudo da Lei', icon:'mdi-link-variant', color: '#f01468', url: 'https://estudodalei.com.br/', text: 'Aplicação de legislaçao e questões'},
-      {name: 'Stephane Lima', icon:'mdi-link-variant', color: '#f01468', url:'https://ste-site.netlify.app/', text: 'Site de apresentação de mentoria'},
-      {name: 'Day-to-do', icon:'mdi-link-variant', color: '#f01468', url: 'https://daytodo.estudodalei.com.br/', text: 'Gerenciador de  finanças'},
-      {name: 'Oh My Search', icon:'mdi-link-variant', color: '#f01468', url: 'https://legislacao.estudodalei.com.br/', text: 'Busca na legislação'},
-      {name: 'Revisão', icon:'mdi-link-variant', color: '#f01468', url: 'https://revisao.estudodalei.com.br/', text: 'Metas e revisão para concursos'},
-      {name: 'Convite', icon:'mdi-link-variant', color: '#f01468', url: 'https://theoniver.netlify.app/', text: 'Convite de aniversário'}
+      {name: 'Estudo da Lei', icon:'mdi-link-variant', color: '#f01468', url: 'https://estudodalei.com.br/', text: 'legislaçao e questões'},
+      {name: 'Stephane Lima', icon:'mdi-link-variant', color: '#f01468', url:'https://ste-site.netlify.app/', text: 'apresentação de mentoria'},
+      {name: 'Day-to-do', icon:'mdi-link-variant', color: '#f01468', url: 'https://daytodo.estudodalei.com.br/', text: 'gerenciador de  finanças'},
+      {name: 'Oh My Search', icon:'mdi-link-variant', color: '#f01468', url: 'https://legislacao.estudodalei.com.br/', text: 'busca na legislação'},
+      {name: 'Revisão', icon:'mdi-link-variant', color: '#f01468', url: 'https://revisao.estudodalei.com.br/', text: 'metas e revisão para concursos'},
+      {name: 'Convite', icon:'mdi-link-variant', color: '#f01468', url: 'https://theoniver.netlify.app/', text: 'convite de aniversário'}
     ])
 
     onMounted(()=> {
@@ -44,6 +45,11 @@
             };
         }
     })
+
+    const goTo = (item) => {
+      const win = window.open(item, '_blank');
+      win.focus();
+    }
 
 </script>
 
@@ -62,7 +68,7 @@
 .card{
   background-color: rgba(255, 255, 255, 0.1);
   width: 300px;
-  height: 160px;
+  min-height: 160px;
   border-radius: 10px;
   position: relative;
   cursor: pointer;
@@ -104,7 +110,7 @@
   border-radius: inherit;
   margin: 1px;
   position: relative;
-  height: calc(100% - 2px);
+  min-height: calc(100% - 2px);
   width: calc(100% - 2px);
   z-index: 2;
 }
@@ -115,10 +121,10 @@
   align-items: baseline;
   gap: .8rem;
   line-height: 1.2;
-  height: 30%;
+  min-height: 30%;
 }
 .card-content .img{
-  height: 70%;
+  min-height: 70%;
   display: flex;
   justify-content: center;
   align-items: center;

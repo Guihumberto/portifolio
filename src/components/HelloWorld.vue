@@ -7,21 +7,22 @@
       </v-avatar>
       <div class="my-2">
         <h1 class="text-h4 font-weight-bold">João Humberto</h1>
-        <div class="text-body-2 font-weight-light m-n1">Desenvolvedor Frontend</div>
-        <p class="text-body-2">humberto.junior28@yahoo.com.br</p>
+        <div class="text-body-2 font-weight-light m-n1 text-red">Desenvolvedor Frontend</div>
+        <!-- <p class="text-body-2"> <v-icon size=".8rem" class="mr-1">mdi-email</v-icon>humberto.junior28@yahoo.com.br</p> -->
+        <v-btn @click="whatsapp" variant="tonal"  prepend-icon="mdi-whatsapp">98 98465-0786</v-btn>
       </div>
     </div>
     <div class="cardsWrapper">
       <div id="cards">
         <div class="card" v-for="item, i in 1" :key="i">
           <div class="card-border"></div>
-          <div class="card-content">
+          <div class="card-content" :class="theme == 'dark' ? '': 'bg-white border'">
             <div class="wrappercontent">
               <div class="icon">
-                <v-icon color="white">mdi-account-tie</v-icon>
+                <v-icon class="mb-1">mdi-account-tie</v-icon>
               </div>
               <div class="texto">
-                <h3 class="text-white">Sobre</h3>
+                <h3>Sobre</h3>
                 <p class="font-weight-thin text-grey">Servidor Público há 13 anos, João Humberto Silva Ribeiro Júnior é desenvolvedor 
                   frontend nas horas vagas. Possui experência com desenvolvimento vue.js e nuxt.js, além de conhecimentos em html, css, javascript,
                   git, firebase, elasticsearch e outras frameworks e bibliotecas. <br>
@@ -43,7 +44,17 @@
 </template>
 
 <script setup>
-  //
+import { inject } from 'vue';
+
+   const whatsapp = () =>{
+    const telefone = '5598984650786';
+    const mensagem = encodeURIComponent('Olá, gostaria de mais informações!');
+    const url = `https://wa.me/${telefone}?text=${mensagem}`;
+    
+    window.open(url, '_blank');
+   }
+
+   const theme = inject('theme')
 </script>
 
 <style scoped>
@@ -146,5 +157,19 @@ section{
   margin-top: 1rem;
   text-align: left;
   line-height: 1.4;
+}
+.container {
+  animation: slideTop 2s ease;
+  transition: .5s ease;
+}
+@keyframes slideTop {
+  0%{
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
