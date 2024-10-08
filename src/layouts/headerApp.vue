@@ -1,10 +1,11 @@
 <template>
     <div class="headerWrapper">
         <div class="subHeader">
-            <v-avatar>JHJ</v-avatar>
+            <v-avatar><span class="text-white">JHJ</span></v-avatar>
             <v-btn 
                 variant="text" :icon="iconDark"
                 @click="darkModeChange()"
+                color="white"
             >
             </v-btn>
         </div>
@@ -14,7 +15,7 @@
 <script setup>
     import { computed, ref } from 'vue'
     
-    const darkMode = ref(false)
+    const darkMode = ref(true)
 
     const iconDark = computed(() => {
         return darkMode.value 
@@ -37,6 +38,8 @@
     padding:5px 10px;
     top: 0;
     width: 100%;
+    z-index: 1000;
+    background: #121212;
 }
 .subHeader{
     width: min(100%, 1080px);

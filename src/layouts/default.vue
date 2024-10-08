@@ -1,7 +1,7 @@
 <template>
   <v-app :theme="theme">
+    <headerApp @darkmode="changeTheme" />
     <v-main>
-      <headerApp @darkmode="changeTheme" />
       <router-view />
     </v-main>
     <AppFooter />
@@ -11,7 +11,7 @@
 <script setup>
   import headerApp from '@/layouts/headerApp.vue'
 
-  const theme = ref('light')
+  const theme = ref('dark')
 
   const changeTheme = (evento) => {
     if(evento.value) theme.value = 'dark'
@@ -21,6 +21,11 @@
 </script>
 
 <style>
+ :root{
+  --bg-color: rgb(20, 20, 20);
+  --card-color: rgb(23, 23, 23);
+  --primary-color: #f01468;
+}
 *, *::before, *::after {
   box-sizing: border-box;
 }

@@ -2,60 +2,42 @@
 <section>
   <div class="container">
     <div class="text-center">
-      <v-avatar size="8rem" color="grey">
+      <v-avatar size="8rem" color="dark">
         <v-icon size="7rem">mdi-account</v-icon>
       </v-avatar>
       <div class="my-2">
         <h1 class="text-h4 font-weight-bold">João Humberto</h1>
         <div class="text-body-2 font-weight-light m-n1">Desenvolvedor Frontend</div>
+        <p class="text-body-2">humberto.junior28@yahoo.com.br</p>
       </div>
     </div>
     <div class="cardsWrapper">
-        <v-card
-          class="py-4 card"
-          color="surface-variant"
-          prepend-icon="mdi-text-box-outline"
-          rounded="lg"
-          title="Informações Profissionais"
-          variant="text"
-          max-width="740px"
-        >
-          <v-overlay
-            opacity=".06"
-            scrim="primary"
-            contained
-            model-value
-            persistent
-          />
-          <v-card-text>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt ad, 
-              deserunt dolore recusandae nemo voluptatem a consectetur neque porro cupiditate, 
-              voluptatibus quidem aspernatur. Vero magnam ipsa minima molestias quaerat eum?
-            </p>
-          </v-card-text>
-        </v-card>
+      <div id="cards">
+        <div class="card" v-for="item, i in 1" :key="i">
+          <div class="card-border"></div>
+          <div class="card-content">
+            <div class="wrappercontent">
+              <div class="icon">
+                <v-icon color="white">mdi-account-tie</v-icon>
+              </div>
+              <div class="texto">
+                <h3 class="text-white">Sobre</h3>
+                <p class="font-weight-thin text-grey">Servidor Público há 13 anos, João Humberto Silva Ribeiro Júnior é desenvolvedor 
+                  frontend nas horas vagas. Possui experência com desenvolvimento vue.js e nuxt.js, além de conhecimentos em html, css, javascript,
+                  git, firebase, elasticsearch e outras frameworks e bibliotecas. <br>
+                  Conheça alguns projetos públicados no portfólio abaixo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="cardsWrapper">
-      <v-card
-        v-for="item, i in 6" :key="i"
-        class="py-4 card"
-        color="surface-variant"
-        prepend-icon="mdi-text-box-outline"
-        rounded="lg"
-        title="Informações Profissionais"
-        variant="text"
-        width="364px"
-      >
-        <v-overlay
-          opacity=".06"
-          scrim="primary"
-          contained
-          model-value
-          persistent
-        />
-      </v-card>
+      <h2>Portfólio</h2>
+      <cards />
     </div>
+    
   </div>
 </section>
 </template>
@@ -66,30 +48,103 @@
 
 <style scoped>
 section{
-  width: 100vw;
-  height: calc(100vh - 40px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.container{
+  width: min(100%, 1080px);
+  margin-top: 10rem;
+  margin-inline: auto;
+  padding: 0 0.5rem;
 }
 .cardsWrapper{
-  margin: 0 auto;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  max-width: 760px;
-  margin-top: 1em;
-  gap: 1rem;
-  padding: .5rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
-@media (max-width: 760px) {
-  .cardsWrapper{
-    justify-content: center;
-  }
-  .card{
-    width: 100%;
-  }
+.cardsWrapper h2{
+  margin: 2rem 0;
+}
+#cards{
+  width: min(100%, 916px);
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+#cards:hover > .card > .card-border {
+  opacity: 1;
+}
+.card{
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 910px;
+  min-height: 160px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.card::before,
+.card > .card-border{
+  border-radius: inherit;
+  content: '';
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  transition: opacity 500ms;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+}
+.card::before{
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+  z-index: 3;
+}
+.card > .card-border{
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.3),
+    transparent 40%
+  );
+  z-index: 1;
+}
+.card:hover::before
+{
+  opacity: 1;
+}
+.card > .card-content{
+  background: var(--card-color);
+  border-radius: inherit;
+  margin: 1px;
+  position: relative;
+  height: calc(100% - 2px);
+  width: calc(100% - 2px);
+  z-index: 2;
+}
+.wrappercontent{
+  margin: 0 1rem;
+  display: flex;
+  justify-content: left;
+  align-items: baseline;
+  gap: .8rem;
+  line-height: 1.2;
+  height: 30%;
+}
+.card-content .img{
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.texto{
+  display: flex;
+  flex-direction: column;
+  align-items: first baseline;
+  justify-content: flex-start;
+  padding: 2rem 0.5rem;
+}
+.texto p {
+  margin-top: 1rem;
+  text-align: left;
+  line-height: 1.4;
 }
 </style>
