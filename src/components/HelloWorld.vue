@@ -3,13 +3,16 @@
   <div class="container">
     <div class="text-center">
       <v-avatar size="8rem" color="dark">
-        <v-icon size="7rem">mdi-account</v-icon>
+        <v-icon size="7rem">mdi-code-block-tags</v-icon>
       </v-avatar>
       <div class="my-2">
         <h1 class="text-h4 font-weight-bold">João Humberto</h1>
-        <div class="text-body-2 font-weight-light m-n1 text-red">Desenvolvedor Frontend</div>
-        <!-- <p class="text-body-2"> <v-icon size=".8rem" class="mr-1">mdi-email</v-icon>humberto.junior28@yahoo.com.br</p> -->
-        <v-btn @click="whatsapp" variant="tonal"  prepend-icon="mdi-whatsapp">98 98465-0786</v-btn>
+        <div class="text-body-2 font-weight-light m-n1 text-red mt-2">Desenvolvedor Frontend</div>
+        <div class="my-3">
+          <v-btn @click="social('https://www.linkedin.com/in/joao-humberto-6a4713232/')" variant="tonal" icon="mdi-linkedin"></v-btn>
+          <v-btn class="mx-2" @click="social('https://www.instagram.com/joaohumberto_dev/')" variant="tonal" icon="mdi-instagram"></v-btn>
+          <v-btn @click="whatsapp" variant="tonal" icon="mdi-whatsapp"></v-btn>
+        </div>
       </div>
     </div>
     <div class="cardsWrapper">
@@ -55,6 +58,10 @@ import { inject } from 'vue';
    }
 
    const theme = inject('theme')
+
+   const social = (url) => {
+      window.open(url, '_blank');
+   }
 </script>
 
 <style scoped>
@@ -63,6 +70,7 @@ section{
   margin-top: 10rem;
   margin-inline: auto;
   padding: 0 0.5rem;
+  transition: 1s ease;
 }
 .cardsWrapper{
   text-align: center;
@@ -170,6 +178,11 @@ section{
   100%{
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@media (max-width: 400px) {
+  section{
+    margin-top: 5rem;
   }
 }
 </style>
